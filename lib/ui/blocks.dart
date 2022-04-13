@@ -1,13 +1,22 @@
+import 'dart:convert';
+
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:video_player/video_player.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_website/components/components.dart';
 import 'package:flutter_website/utils/utils.dart';
-import 'package:responsive_framework/responsive_framework.dart';
-
-import 'package:video_player/video_player.dart';
 
 class MenuBar extends StatelessWidget {
-  const MenuBar({Key? key}) : super(key: key);
+  final ItemScrollController itemScrollController;
+
+  MenuBar({
+    Key? key,
+    required this.itemScrollController,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +33,9 @@ class MenuBar extends StatelessWidget {
               onTap: () =>
                   Navigator.of(context).popUntil((route) => route.isFirst),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 5, 16, 5),
-                child: Image.asset("assets/images/flutter_logo_text.png",
-                    height: 37, fit: BoxFit.contain),
+                padding: const EdgeInsets.fromLTRB(15, 5, 16, 5),
+                child: Image.asset("assets/images/soludev_logo_text.png",
+                    height: 60, fit: BoxFit.contain),
               ),
             ),
           ),
@@ -37,7 +46,12 @@ class MenuBar extends StatelessWidget {
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
-                onTap: () => openUrl("https://flutter.dev/docs"),
+                onTap: () {
+                  itemScrollController.scrollTo(
+                      index: 0,
+                      duration: Duration(seconds: 2),
+                      curve: Curves.easeInOutCubic);
+                },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Text("Inicio",
@@ -55,7 +69,12 @@ class MenuBar extends StatelessWidget {
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
-                onTap: () => openUrl("https://flutter.dev/showcase"),
+                onTap: () {
+                  itemScrollController.scrollTo(
+                      index: 2,
+                      duration: Duration(seconds: 2),
+                      curve: Curves.easeInOutCubic);
+                },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Text("Santiago Cocina",
@@ -73,7 +92,12 @@ class MenuBar extends StatelessWidget {
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
-                onTap: () => openUrl("https://flutter.dev/community"),
+                onTap: () {
+                  itemScrollController.scrollTo(
+                      index: 3,
+                      duration: Duration(seconds: 2),
+                      curve: Curves.easeInOutCubic);
+                },
                 child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: Text("Digital Menu",
@@ -104,7 +128,8 @@ class MenuBar extends StatelessWidget {
           MouseRegion(
             cursor: SystemMouseCursors.click,
             child: GestureDetector(
-              onTap: () => openUrl('https://www.youtube.com/flutterdev'),
+              onTap: () => openUrl(
+                  'https://www.youtube.com/channel/UCeldMeYBi5ebvTmB7t_3XLA'),
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 child: ImageIcon(
@@ -120,8 +145,12 @@ class MenuBar extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 8, right: 0),
               child: TextButton(
-                onPressed: () =>
-                    openUrl("https://flutter.dev/docs/get-started/install"),
+                onPressed: () {
+                  itemScrollController.scrollTo(
+                      index: 4,
+                      duration: Duration(seconds: 2),
+                      curve: Curves.easeInOutCubic);
+                },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(primary),
                     overlayColor: MaterialStateProperty.resolveWith<Color>(
@@ -162,7 +191,7 @@ class MenuBar extends StatelessWidget {
                       }
                       // Transparent border placeholder as Flutter does not allow
                       // negative margins.
-                      return const BorderSide(width: 3, color: Colors.white);
+                      return const BorderSide(width: 0, color: Colors.white);
                     })),
                 child: Text(
                   "Contactanos",
@@ -306,7 +335,8 @@ class _FastDevelopmentState extends State<FastDevelopment> {
   @override
   void initState() {
     super.initState();
-    videoController = VideoPlayerController.asset("assets/videos/FastDev.mp4");
+    videoController = VideoPlayerController.asset(
+        "assets/videos/Video_Santiago_Cocina_web.mp4");
     videoController.setVolume(0);
     videoController.setLooping(true);
     initializeVideoPlayerFuture = videoController.initialize().then((_) {
@@ -430,7 +460,7 @@ class _BeautifulUIState extends State<BeautifulUI> {
   void initState() {
     super.initState();
     videoController =
-        VideoPlayerController.asset("assets/videos/BeautifulUI.mp4");
+        VideoPlayerController.asset("assets/videos/Video_Digital_Menu_web.mp4");
     videoController.setVolume(0);
     videoController.setLooping(true);
     initializeVideoPlayerFuture = videoController.initialize().then((_) {
@@ -537,8 +567,8 @@ class _BeautifulUIState extends State<BeautifulUI> {
   }
 }
 
-class InstallFlutter extends StatelessWidget {
-  const InstallFlutter({Key? key}) : super(key: key);
+class ContactSoludev extends StatelessWidget {
+  const ContactSoludev({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -558,72 +588,312 @@ class InstallFlutter extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.only(bottom: 16),
-                child: Text("Install Flutter today.", style: headlineTextStyle),
+                child: Text("Contactanos.", style: headlineTextStyle),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 16),
-                child: Text("It’s free and open source.",
+                child: Text("Para consultas e información sobre proyectos.",
                     style: bodyTextStyle.copyWith(fontSize: 24)),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 32),
-                child: TextButton(
-                  onPressed: () =>
-                      openUrl("https://flutter.dev/docs/get-started/install"),
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(primary),
-                      overlayColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.hovered)) {
-                            return buttonPrimaryDark;
-                          }
-                          if (states.contains(MaterialState.focused) ||
-                              states.contains(MaterialState.pressed)) {
-                            return buttonPrimaryDarkPressed;
-                          }
-                          return primary;
-                        },
+              ContactForm(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ContactForm extends StatefulWidget {
+  ContactForm({
+    key,
+  }) : super(key: key);
+
+  @override
+  State<ContactForm> createState() => _ContactFormState();
+}
+
+class _ContactFormState extends State<ContactForm> {
+  //Controladores
+  final _nombreController = TextEditingController();
+  final _emailController = TextEditingController();
+  //dropdown tipo de proyecto
+  String? _chosenValue;
+  final _telefonoController = TextEditingController();
+  final _descripcionController = TextEditingController();
+
+  //Focus
+  late FocusNode focusNombre,
+      focusEmail,
+      focusTelefono,
+      focusDescripcion,
+      focusTipo;
+
+  @override
+  void initState() {
+    focusNombre = FocusNode();
+    focusEmail = FocusNode();
+    focusTelefono = FocusNode();
+    focusDescripcion = FocusNode();
+    focusTipo = FocusNode();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    //Limpiando controladores
+    _nombreController.dispose();
+    _emailController.dispose();
+    _telefonoController.dispose();
+    _descripcionController.dispose();
+    //Limpiando focos
+    focusNombre.dispose();
+    focusEmail.dispose();
+    focusTelefono.dispose();
+    focusDescripcion.dispose();
+    focusTipo.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child: Wrap(
+        spacing: 20.0 * 2.5,
+        runSpacing: 20.0 * 1.5,
+        children: [
+          TextFormField(
+            controller: _nombreController,
+            focusNode: focusNombre,
+            onEditingComplete: () {
+              FocusScope.of(context).requestFocus(focusEmail);
+            },
+            onChanged: (value) {},
+            decoration: InputDecoration(
+              labelText: "Nombre",
+              hintText: "Ingrese su nombre",
+              border: OutlineInputBorder(),
+            ),
+          ),
+          TextFormField(
+            controller: _emailController,
+            focusNode: focusEmail,
+            onEditingComplete: () {
+              FocusScope.of(context).requestFocus(focusTipo);
+            },
+            onChanged: (value) {},
+            validator: (value) {
+              return value != null && !EmailValidator.validate(value)
+                  ? 'Enter a valid email'
+                  : null;
+            },
+            decoration: InputDecoration(
+              labelText: "Correo electrónico",
+              hintText: "Ingrese su dirección de correoelectrónico",
+              border: OutlineInputBorder(),
+            ),
+          ),
+          ResponsiveRowColumn(
+            layout: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                ? ResponsiveRowColumnType.COLUMN
+                : ResponsiveRowColumnType.ROW,
+            rowCrossAxisAlignment: CrossAxisAlignment.start,
+            //rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
+            columnMainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ResponsiveRowColumnItem(
+                rowFlex: 1,
+                columnOrder: 1,
+                child: Container(
+                  padding: const EdgeInsets.only(
+                      top: 1, bottom: 1, right: 12, left: 12),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromARGB(255, 117, 117, 117),
+                      width: 0.7,
+                    ),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: DropdownButton<String>(
+                    onTap: () {
+                      FocusScope.of(context).requestFocus(focusTelefono);
+                    },
+                    focusNode: focusTipo,
+                    underline: Container(
+                        decoration: const BoxDecoration(
+                            border: Border(bottom: BorderSide.none))),
+                    isExpanded: true,
+                    icon: Icon(Icons.arrow_downward_rounded,
+                        color: Colors.grey[600]),
+                    borderRadius: BorderRadius.circular(5),
+                    value: _chosenValue,
+                    items: <String>[
+                      "Android",
+                      "IOS",
+                      "Web",
+                      "Desktop",
+                      "Varias"
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                      );
+                    }).toList(),
+                    hint: Container(
+                      //padding: const EdgeInsets.only(left: 25),
+                      child: Text(
+                        "Tipo de proyecto",
+                        style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "Muli"),
                       ),
-                      // Shape sets the border radius from default 3 to 0.
-                      shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.focused) ||
-                              states.contains(MaterialState.pressed)) {
-                            return const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(0)));
-                          }
-                          return const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(0)));
-                        },
-                      ),
-                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                          const EdgeInsets.symmetric(
-                              vertical: 32, horizontal: 90)),
-                      // Side adds pressed highlight outline.
-                      side: MaterialStateProperty.resolveWith<BorderSide>(
-                          (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.focused) ||
-                            states.contains(MaterialState.pressed)) {
-                          return const BorderSide(
-                              width: 3, color: buttonPrimaryPressedOutline);
-                        }
-                        // Transparent border placeholder as Flutter does not allow
-                        // negative margins.
-                        return const BorderSide(width: 3, color: Colors.white);
-                      })),
-                  child: Text(
-                    "Get started",
-                    style: buttonTextStyle.copyWith(fontSize: 18),
+                    ),
+                    onChanged: (String? value) {
+                      setState(() {
+                        _chosenValue = value;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              //ver mejorar
+              ResponsiveRowColumnItem(
+                  //rowFlex: 2,
+                  columnOrder: 2,
+                  child: SizedBox(height: 30, width: 5)),
+              ResponsiveRowColumnItem(
+                rowFlex: 3,
+                columnOrder: 3,
+                child: TextFormField(
+                  controller: _telefonoController,
+                  focusNode: focusTelefono,
+                  onEditingComplete: () {
+                    FocusScope.of(context).requestFocus(focusDescripcion);
+                  },
+                  onChanged: (value) {},
+                  decoration: InputDecoration(
+                    labelText: "Teléfono",
+                    hintText: "ingrese su teléfono",
+                    border: OutlineInputBorder(),
                   ),
                 ),
               ),
             ],
           ),
-        ),
+          TextFormField(
+            maxLines: 5,
+            controller: _descripcionController,
+            focusNode: focusDescripcion,
+            onEditingComplete: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            onChanged: (value) {},
+            decoration: InputDecoration(
+              labelText: "Descripción",
+              alignLabelWithHint: true,
+              hintText: "Ingrese su consulta",
+              border: OutlineInputBorder(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 32),
+            child: Center(
+              child: TextButton(
+                onPressed: () {
+                  sendEmail(
+                      name: _nombreController.text.trim(),
+                      email: _emailController.text.trim(),
+                      subject: "Consulta sobre: desarrollo $_chosenValue.",
+                      message: "      Email: ${_emailController.text.trim()}."
+                          "     Teléfono: ${_telefonoController.text.trim()}."
+                          "     Mensaje: ${_descripcionController.text.trim()}.");
+                },
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(primary),
+                    overlayColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.hovered)) {
+                          return buttonPrimaryDark;
+                        }
+                        if (states.contains(MaterialState.focused) ||
+                            states.contains(MaterialState.pressed)) {
+                          return buttonPrimaryDarkPressed;
+                        }
+                        return primary;
+                      },
+                    ),
+                    // Shape sets the border radius from default 3 to 0.
+                    shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
+                      (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.focused) ||
+                            states.contains(MaterialState.pressed)) {
+                          return const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0)));
+                        }
+                        return const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(0)));
+                      },
+                    ),
+                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                        const EdgeInsets.symmetric(
+                            vertical: 32, horizontal: 90)),
+                    // Side adds pressed highlight outline.
+                    side: MaterialStateProperty.resolveWith<BorderSide>(
+                        (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return const BorderSide(
+                            width: 3, color: buttonPrimaryPressedOutline);
+                      }
+                      // Transparent border placeholder as Flutter does not allow
+                      // negative margins.
+                      return const BorderSide(width: 3, color: Colors.white);
+                    })),
+                child: Text(
+                  "Enviar consulta",
+                  style: buttonTextStyle.copyWith(fontSize: 18),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
+    );
+  }
+
+  Future sendEmail(
+      {required String name,
+      required String email,
+      required String subject,
+      required String message}) async {
+    final serviceId = 'service_dvkuq1m';
+    final templateId = 'template_0f6hyjb';
+    final userId = 'urhOJhqRSNLtJx_L1';
+    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    final response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'service_id': serviceId,
+        'template_id': templateId,
+        'user_id': userId,
+        'template_params': {
+          'user_name': name,
+          'user_email': email,
+          'user_subject': subject,
+          'user_message': message,
+        }
+      }),
     );
   }
 }
@@ -646,7 +916,7 @@ class Footer extends StatelessWidget {
           ResponsiveRowColumnItem(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 20, 20, 20),
-              child: Image.asset("assets/images/flutter_logo_mono.png",
+              child: Image.asset("assets/images/soludev_logo_mono.png",
                   height: 100, fit: BoxFit.contain),
             ),
           ),
@@ -717,7 +987,7 @@ class Footer extends StatelessWidget {
                         const TextSpan(text: '\n'),
                         TextSpan(
                             text:
-                                "Except as otherwise noted, this work is licensed under a Creative Commons Attribution 4.0 International License, and code samples are licensed under the BSD License.",
+                                "SoluDev - Santiago del Estero, Argentina - soludevarg@gmail.com - © Copyright SoluDev. Todos los derechos reservados.",
                             style: bodyTextStyle.copyWith(
                                 fontSize: 10, color: Colors.white)),
                         const TextSpan(text: '\n'),

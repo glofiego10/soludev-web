@@ -33,12 +33,6 @@ class _CarouselSlide1State extends State<CarouselSlide1>
         entry: 14,
         exit: 231),
     SlideItemAnimationModel(
-        id: "slide_1-layer_2",
-        entryDuration: 800,
-        exitDuration: 500,
-        entry: 26,
-        exit: 238),
-    SlideItemAnimationModel(
         id: "slide_1-text",
         entryDuration: 800,
         exitDuration: 500,
@@ -61,8 +55,7 @@ class _CarouselSlide1State extends State<CarouselSlide1>
     animation = Tween<double>(begin: 0, end: 252).animate(animationController)
       ..addListener(() {
         setState(() {
-          slideItems =
-              getSlideItemAnimationUpdate(animation.value, slideItems);
+          slideItems = getSlideItemAnimationUpdate(animation.value, slideItems);
         });
       });
     animationController.forward();
@@ -78,7 +71,7 @@ class _CarouselSlide1State extends State<CarouselSlide1>
           Positioned(
             left: 449,
             top: 116,
-            width: 400,
+            width: 650,
             height: 400,
             child: WidgetSlideUpDownFadeAnimation(
               duration: getSlideItemAnimationDuration("slide_1-bg", slideItems),
@@ -101,21 +94,6 @@ class _CarouselSlide1State extends State<CarouselSlide1>
                   "slide_1-layer_1", slideItems),
               offset: slideItemOffset,
               child: Image.asset("assets/images/slide_1-layer_1.png",
-                  fit: BoxFit.fill),
-            ),
-          ),
-          Positioned(
-            left: 374,
-            top: 148,
-            width: 596,
-            height: 368,
-            child: WidgetSlideUpDownFadeAnimation(
-              duration:
-                  getSlideItemAnimationDuration("slide_1-layer_2", slideItems),
-              direction: getSlideItemAnimationVisibility(
-                  "slide_1-layer_2", slideItems),
-              offset: slideItemOffset,
-              child: Image.asset("assets/images/slide_1-layer_2.png",
                   fit: BoxFit.fill),
             ),
           ),

@@ -27,12 +27,6 @@ class _CarouselSlide4State extends State<CarouselSlide4>
         entry: 0,
         exit: 166),
     SlideItemAnimationModel(
-        id: "slide_4-layer_1",
-        entryDuration: 800,
-        exitDuration: 500,
-        entry: 14,
-        exit: 176),
-    SlideItemAnimationModel(
         id: "slide_4-layer_2",
         entryDuration: 800,
         exitDuration: 500,
@@ -61,8 +55,7 @@ class _CarouselSlide4State extends State<CarouselSlide4>
     animation = Tween<double>(begin: 0, end: 200).animate(animationController)
       ..addListener(() {
         setState(() {
-          slideItems =
-              getSlideItemAnimationUpdate(animation.value, slideItems);
+          slideItems = getSlideItemAnimationUpdate(animation.value, slideItems);
         });
       });
     animationController.forward();
@@ -85,22 +78,7 @@ class _CarouselSlide4State extends State<CarouselSlide4>
               direction:
                   getSlideItemAnimationVisibility("slide_4-bg", slideItems),
               offset: slideItemOffset,
-              child:
-                  Image.asset("assets/images/slide_4-bg.jpg", fit: BoxFit.fill),
-            ),
-          ),
-          Positioned(
-            left: 232,
-            top: 108,
-            width: 735,
-            height: 428,
-            child: WidgetSlideUpDownFadeAnimation(
-              duration:
-                  getSlideItemAnimationDuration("slide_4-layer_1", slideItems),
-              direction: getSlideItemAnimationVisibility(
-                  "slide_4-layer_1", slideItems),
-              offset: slideItemOffset,
-              child: Image.asset("assets/images/slide_4-layer_1.png",
+              child: Image.asset("assets/images/slide_4-bg.jpeg",
                   fit: BoxFit.fill),
             ),
           ),
