@@ -49,7 +49,7 @@ class MenuBar extends StatelessWidget {
                 onTap: () {
                   itemScrollController.scrollTo(
                       index: 0,
-                      duration: Duration(seconds: 2),
+                      duration: const Duration(seconds: 2),
                       curve: Curves.easeInOutCubic);
                 },
                 child: const Padding(
@@ -72,7 +72,7 @@ class MenuBar extends StatelessWidget {
                 onTap: () {
                   itemScrollController.scrollTo(
                       index: 2,
-                      duration: Duration(seconds: 2),
+                      duration: const Duration(seconds: 2),
                       curve: Curves.easeInOutCubic);
                 },
                 child: const Padding(
@@ -95,7 +95,7 @@ class MenuBar extends StatelessWidget {
                 onTap: () {
                   itemScrollController.scrollTo(
                       index: 3,
-                      duration: Duration(seconds: 2),
+                      duration: const Duration(seconds: 2),
                       curve: Curves.easeInOutCubic);
                 },
                 child: const Padding(
@@ -114,7 +114,12 @@ class MenuBar extends StatelessWidget {
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
-                onTap: () => openUrl("https://flutter.dev/community"),
+                onTap: () {
+                  itemScrollController.scrollTo(
+                      index: 4,
+                      duration: const Duration(seconds: 2),
+                      curve: Curves.easeInOutCubic);
+                },
                 child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: Text("Sobre Nosotros",
@@ -122,6 +127,20 @@ class MenuBar extends StatelessWidget {
                             fontSize: 16,
                             color: navLinkColor,
                             fontFamily: fontFamily))),
+              ),
+            ),
+          ),
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () => openUrl(
+                  'https://play.google.com/store/apps/developer?id=SoluDev'),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                child: ImageIcon(
+                    AssetImage("assets/images/google-play-gris.png"),
+                    color: navLinkColor,
+                    size: 24),
               ),
             ),
           ),
@@ -147,8 +166,8 @@ class MenuBar extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   itemScrollController.scrollTo(
-                      index: 4,
-                      duration: Duration(seconds: 2),
+                      index: 5,
+                      duration: const Duration(seconds: 2),
                       curve: Curves.easeInOutCubic);
                 },
                 style: ButtonStyle(
@@ -321,14 +340,14 @@ class Features extends StatelessWidget {
   }
 }
 
-class FastDevelopment extends StatefulWidget {
-  const FastDevelopment({Key? key}) : super(key: key);
+class SantiagoCocina extends StatefulWidget {
+  const SantiagoCocina({Key? key}) : super(key: key);
 
   @override
-  _FastDevelopmentState createState() => _FastDevelopmentState();
+  _SantiagoCocinaState createState() => _SantiagoCocinaState();
 }
 
-class _FastDevelopmentState extends State<FastDevelopment> {
+class _SantiagoCocinaState extends State<SantiagoCocina> {
   late VideoPlayerController videoController;
   late Future<void> initializeVideoPlayerFuture;
 
@@ -402,39 +421,48 @@ class _FastDevelopmentState extends State<FastDevelopment> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: buildMaterialIconCircle(
-                        "assets/images/icon_development.png", 68),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 32),
-                    child: Text("Fast Development", style: headlineTextStyle),
-                  ),
                   RichText(
+                    textAlign: TextAlign.justify,
                     text: TextSpan(
-                      style: bodyTextStyle,
-                      children: [
-                        const TextSpan(text: "Flutter's "),
+                      style: bodyTextStyle.copyWith(fontSize: 20),
+                      children: const [
                         TextSpan(
-                            text: "hot reload",
-                            style: bodyTextStyle.copyWith(
-                                fontStyle: FontStyle.italic)),
-                        const TextSpan(
+                            text: "• Consultá las recetas dulces y saladas."),
+                        TextSpan(text: "\n"),
+                        TextSpan(
                             text:
-                                " helps you quickly and easily experiment, build UIs, add features, and fix bugs faster. Experience sub-second reload times, without losing state, on emulators, simulators, and hardware for iOS and Android."),
-                        const TextSpan(text: "\n\n"),
+                                "• Obtené instrucciones paso a paso sobre cómo cocinar cada receta."),
+                        TextSpan(text: "\n"),
                         TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                openUrl(
-                                    "https://flutter.dev/docs/development/tools/hot-reload");
-                              },
-                            text: "Learn more",
-                            style: bodyLinkTextStyle)
+                            text:
+                                "• Utilizá la opción búsqueda para encontrar tu receta favorita."),
+                        TextSpan(text: "\n"),
+                        TextSpan(
+                            text:
+                                "• Compartí tus recetas favoritas por WhatsApp, Gmail, Facebook, Instagram, etc."),
+                        TextSpan(text: "\n"),
+                        TextSpan(
+                            text:
+                                "• App 100% gratis, descargala desde google play."),
+                        TextSpan(text: "\n"),
+                        TextSpan(text: "\n"),
                       ],
                     ),
-                  )
+                  ),
+                  MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: () {
+                        openUrl(
+                            "https://play.google.com/store/apps/details?id=com.soludevarg.santiagococinaapp");
+                      },
+                      child: const Image(
+                        image: const AssetImage(
+                            'assets/images/disponible-google-play.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -445,14 +473,14 @@ class _FastDevelopmentState extends State<FastDevelopment> {
   }
 }
 
-class BeautifulUI extends StatefulWidget {
-  const BeautifulUI({Key? key}) : super(key: key);
+class DigitalMenu extends StatefulWidget {
+  const DigitalMenu({Key? key}) : super(key: key);
 
   @override
-  _BeautifulUIState createState() => _BeautifulUIState();
+  _DigitalMenuState createState() => _DigitalMenuState();
 }
 
-class _BeautifulUIState extends State<BeautifulUI> {
+class _DigitalMenuState extends State<DigitalMenu> {
   late VideoPlayerController videoController;
   late Future<void> initializeVideoPlayerFuture;
 
@@ -507,35 +535,33 @@ class _BeautifulUIState extends State<BeautifulUI> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: buildMaterialIconCircle(
-                        "assets/images/icon_ui.png", 68),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 32),
-                    child: Text("Expressive, beautiful UIs",
-                        style: headlineTextStyle),
-                  ),
                   RichText(
+                    textAlign: TextAlign.justify,
                     text: TextSpan(
-                      style: bodyTextStyle,
-                      children: [
-                        const TextSpan(
-                            text:
-                                "Delight your users with Flutter's built-in beautiful Material Design and Cupertino (iOS-flavor) widgets, rich motion APIs, smooth natural scrolling, and platform awareness."),
-                        const TextSpan(text: "\n\n"),
+                      style: bodyTextStyle.copyWith(fontSize: 18),
+                      children: const [
                         TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                openUrl(
-                                    "https://flutter.dev/docs/development/ui/widgets/catalog");
-                              },
-                            text: "Browse the widget catalog",
-                            style: bodyLinkTextStyle),
+                            text:
+                                "La forma más fácil de diseñar menús QR, incluso sin un día de experiencia en diseño. ¡En cuestión de minutos, puede crear menús que llamarán la atención sobre su negocio, cafetería, bar o restaurante!\nEn esta aplicación encontraras muchos recursos gratuitos que incluyen muchas imágenes y variadas plantillas, fuentes e íconos que puede usar de forma totalmente gratuita. ¿Quieres algo oscuro, claro, clásico o elegante? Lo encontrarás. Además, la aplicación viene con la funcionalidad Lector QR."),
+                        TextSpan(text: "\n"),
+                        TextSpan(text: "\n"),
                       ],
                     ),
-                  )
+                  ),
+                  MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: () {
+                        openUrl(
+                            "https://play.google.com/store/apps/details?id=com.soludevarg.digitalmenu");
+                      },
+                      child: const Image(
+                        image: const AssetImage(
+                            'assets/images/disponible-google-play.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -562,6 +588,71 @@ class _BeautifulUIState extends State<BeautifulUI> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class SobreNosotros extends StatelessWidget {
+  const SobreNosotros({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(4),
+          border: Border.all(color: border)),
+      margin: blockMargin,
+      padding: blockPadding(context),
+      child: Align(
+        alignment: Alignment.center,
+        child: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  opacity: 0.2,
+                  image:
+                      AssetImage('assets/images/soludev_logo_horizontal.png'))),
+          constraints: const BoxConstraints(maxWidth: 800),
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(bottom: 16),
+                child: Text("Conocenos.", style: headlineTextStyle),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Text(
+                  "Somos SoluDev, una Start-Up Argentina que genera proyectos tecnolólogicos innovadores con un alto impacto positivo en la comunidad. Esto lo realizamos trabajando con tecnologías exponenciales en iniciativas de mejorar la calidad de navegacion de los usuarios.",
+                  style: bodyTextStyle.copyWith(fontSize: 18, shadows: [
+                    const Shadow(
+                      color: Colors.white,
+                      offset: Offset(1, 1),
+                      blurRadius: 1,
+                    ),
+                    const Shadow(
+                      color: Colors.white,
+                      offset: const Offset(-1, -1),
+                      blurRadius: 1,
+                    ),
+                    const Shadow(
+                      color: Colors.white,
+                      offset: const Offset(-1, 1),
+                      blurRadius: 1,
+                    ),
+                    const Shadow(
+                      color: Colors.white,
+                      offset: const Offset(1, -1),
+                      blurRadius: 1,
+                    )
+                  ]),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -657,9 +748,12 @@ class _ContactFormState extends State<ContactForm> {
     super.dispose();
   }
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Wrap(
         spacing: 20.0 * 2.5,
         runSpacing: 20.0 * 1.5,
@@ -670,11 +764,17 @@ class _ContactFormState extends State<ContactForm> {
             onEditingComplete: () {
               FocusScope.of(context).requestFocus(focusEmail);
             },
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Debes ingresar tu nombre";
+              }
+              return null;
+            },
             onChanged: (value) {},
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: "Nombre",
               hintText: "Ingrese su nombre",
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
           ),
           TextFormField(
@@ -686,12 +786,12 @@ class _ContactFormState extends State<ContactForm> {
             onChanged: (value) {},
             validator: (value) {
               return value != null && !EmailValidator.validate(value)
-                  ? 'Enter a valid email'
+                  ? 'Debes ingresar un e-mail valido\n Ejemplo. xxxxx@yyyy.zzz'
                   : null;
             },
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: "Correo electrónico",
-              hintText: "Ingrese su dirección de correoelectrónico",
+              hintText: "Ingrese su dirección de correo electrónico",
               border: OutlineInputBorder(),
             ),
           ),
@@ -699,11 +799,11 @@ class _ContactFormState extends State<ContactForm> {
             layout: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
                 ? ResponsiveRowColumnType.COLUMN
                 : ResponsiveRowColumnType.ROW,
-            rowCrossAxisAlignment: CrossAxisAlignment.start,
-            //rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
-            columnMainAxisAlignment: MainAxisAlignment.spaceBetween,
+            rowSpacing: 25,
+            columnSpacing: 30,
             children: [
               ResponsiveRowColumnItem(
+                rowOrder: 1,
                 rowFlex: 1,
                 columnOrder: 1,
                 child: Container(
@@ -711,7 +811,7 @@ class _ContactFormState extends State<ContactForm> {
                       top: 1, bottom: 1, right: 12, left: 12),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Color.fromARGB(255, 117, 117, 117),
+                      color: const Color.fromARGB(255, 117, 117, 117),
                       width: 0.7,
                     ),
                     borderRadius: BorderRadius.circular(5),
@@ -734,7 +834,7 @@ class _ContactFormState extends State<ContactForm> {
                       "IOS",
                       "Web",
                       "Desktop",
-                      "Varias"
+                      "Varios"
                     ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -763,25 +863,27 @@ class _ContactFormState extends State<ContactForm> {
                   ),
                 ),
               ),
-              //ver mejorar
               ResponsiveRowColumnItem(
-                  //rowFlex: 2,
-                  columnOrder: 2,
-                  child: SizedBox(height: 30, width: 5)),
-              ResponsiveRowColumnItem(
-                rowFlex: 3,
-                columnOrder: 3,
+                rowOrder: 2,
+                rowFlex: 1,
+                columnOrder: 2,
                 child: TextFormField(
                   controller: _telefonoController,
                   focusNode: focusTelefono,
                   onEditingComplete: () {
                     FocusScope.of(context).requestFocus(focusDescripcion);
                   },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Debes ingresar tu número de teléfono";
+                    }
+                    return null;
+                  },
                   onChanged: (value) {},
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Teléfono",
                     hintText: "ingrese su teléfono",
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                   ),
                 ),
               ),
@@ -795,11 +897,17 @@ class _ContactFormState extends State<ContactForm> {
               FocusScope.of(context).requestFocus(FocusNode());
             },
             onChanged: (value) {},
-            decoration: InputDecoration(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Debes ingresar tu consulta";
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
               labelText: "Descripción",
               alignLabelWithHint: true,
               hintText: "Ingrese su consulta",
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
           ),
           Padding(
@@ -807,13 +915,55 @@ class _ContactFormState extends State<ContactForm> {
             child: Center(
               child: TextButton(
                 onPressed: () {
-                  sendEmail(
-                      name: _nombreController.text.trim(),
-                      email: _emailController.text.trim(),
-                      subject: "Consulta sobre: desarrollo $_chosenValue.",
-                      message: "      Email: ${_emailController.text.trim()}."
-                          "     Teléfono: ${_telefonoController.text.trim()}."
-                          "     Mensaje: ${_descripcionController.text.trim()}.");
+                  if (_formKey.currentState!.validate()) {
+                    sendEmail(
+                        name: _nombreController.text.trim(),
+                        email: _emailController.text.trim(),
+                        subject: _chosenValue == null
+                            ? "Consulta sobre: desarrollo 'sin especificar'."
+                            : "Consulta sobre: desarrollo $_chosenValue.",
+                        message: "      Email: ${_emailController.text.trim()}."
+                            "     Teléfono: ${_telefonoController.text.trim()}."
+                            "     Mensaje: ${_descripcionController.text.trim()}.");
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Contacto'),
+                            content: const Text(
+                                'Su mensaje fue enviado exitosamente, recibirá una respuesta a la brevedad. Gracias por comunicarte con nosotros.'),
+                            actions: <Widget>[
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Aceptar')),
+                            ],
+                          );
+                        });
+                    _nombreController.clear();
+                    _emailController.clear();
+                    _telefonoController.clear();
+                    _descripcionController.clear();
+                    _chosenValue = null;
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text(
+                                'Debes ingresar de forma correcta los campos solicitados para poder continuar.'),
+                            actions: <Widget>[
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Aceptar')),
+                            ],
+                          );
+                        });
+                  }
                 },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(primary),
@@ -936,45 +1086,39 @@ class Footer extends StatelessWidget {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               openUrl(
-                                  "https://groups.google.com/forum/#!forum/flutter-dev");
+                                  "https://play.google.com/store/apps/developer?id=SoluDev");
                             },
-                          text: "flutter-dev@"),
-                      const TextSpan(text: "  •  "),
-                      TextSpan(
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              openUrl("https://flutter.dev/tos");
-                            },
-                          text: "terms"),
-                      const TextSpan(text: "  •  "),
-                      TextSpan(
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              openUrl("https://flutter.dev/security");
-                            },
-                          text: "security"),
+                          text: "google play"),
                       const TextSpan(text: "  •  "),
                       TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               openUrl(
-                                  "https://www.google.com/intl/en/policies/privacy");
+                                  "https://www.youtube.com/channel/UCeldMeYBi5ebvTmB7t_3XLA");
                             },
-                          text: "privacy"),
+                          text: "youtube"),
                       const TextSpan(text: "  •  "),
                       TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              openUrl("https://flutter-es.io/");
+                              openUrl(
+                                  "https://drive.google.com/file/d/1v2KTZfr2AgrAz4Z10nyYa5Hsyei7EriI/view?usp=sharing");
+                            },
+                          text: "políticas de privacidad"),
+                      const TextSpan(text: "  •  "),
+                      TextSpan(
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              openUrl("https://soludevs.web.app/");
                             },
                           text: "español"),
                       const TextSpan(text: "  •  "),
                       TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              openUrl("https://flutter.cn/");
+                              openUrl("https://soludevs.web.app/");
                             },
-                          text: "社区中文资源"),
+                          text: "english"),
                     ],
                   ),
                 ),

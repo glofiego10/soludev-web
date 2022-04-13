@@ -89,8 +89,9 @@ List<Widget> blocks = [
       defaultScale: true,
       mediaQueryData: const MediaQueryData(size: Size(1200, 640)),
       child: RepaintBoundary(child: Carousel())),
-  const BlockWrapper(FastDevelopment()),
-  const BlockWrapper(BeautifulUI()),
+  const BlockWrapper(SantiagoCocina()),
+  const BlockWrapper(DigitalMenu()),
+  const BlockWrapper(SobreNosotros()),
   const BlockWrapper(ContactSoludev()),
   const Footer(),
 ];
