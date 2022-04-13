@@ -1,11 +1,11 @@
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:appbar_elevation/appbar_elevation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'package:flutter_website/ui/block_wrapper.dart';
 import 'package:flutter_website/ui/carousel/carousel.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import 'components/components.dart';
 import 'ui/blocks.dart';
@@ -31,6 +31,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ItemScrollController itemScrollController = ItemScrollController();
+    final ItemPositionsListener itemPositionsListener =
+        ItemPositionsListener.create();
+
     return MaterialApp(
       builder: (context, widget) => ResponsiveWrapper.builder(
           ClampingScrollWrapper.builder(context, widget!),
@@ -52,20 +56,22 @@ class MyApp extends StatelessWidget {
             print("error");
           }
           if (snapshot.connectionState == ConnectionState.done) {
-            return ScrollActivatedAppBarElevation(
-                builder: (BuildContext context, double appBarElevation) {
-              return Scaffold(
-                appBar: PreferredSize(
-                    preferredSize: const Size(double.infinity, 66),
-                    child: Material(
-                        elevation: appBarElevation, child: const MenuBar())),
-                body: ListView.builder(
-                    itemCount: blocks.length,
-                    itemBuilder: (context, index) {
-                      return blocks[index];
-                    }),
-              );
-            });
+            return Scaffold(
+              appBar: PreferredSize(
+                  preferredSize: const Size(double.infinity, 66),
+                  child: Material(
+                      elevation: 4,
+                      child: MenuBar(
+                        itemScrollController: itemScrollController,
+                      ))),
+              body: ScrollablePositionedList.builder(
+                  itemScrollController: itemScrollController,
+                  itemPositionsListener: itemPositionsListener,
+                  itemCount: blocks.length,
+                  itemBuilder: (context, index) {
+                    return blocks[index];
+                  }),
+            );
           }
           return const CircularProgressIndicator();
         },
@@ -76,15 +82,15 @@ class MyApp extends StatelessWidget {
 }
 
 List<Widget> blocks = [
+  const BlockWrapper(Features()),
   ResponsiveWrapper(
       maxWidth: 1200,
       minWidth: 1200,
       defaultScale: true,
       mediaQueryData: const MediaQueryData(size: Size(1200, 640)),
       child: RepaintBoundary(child: Carousel())),
-  const BlockWrapper(Features()),
   const BlockWrapper(FastDevelopment()),
   const BlockWrapper(BeautifulUI()),
-  const BlockWrapper(InstallFlutter()),
+  const BlockWrapper(ContactSoludev()),
   const Footer(),
 ];

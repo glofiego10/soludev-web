@@ -27,12 +27,6 @@ class _CarouselSlide3State extends State<CarouselSlide3>
         entry: 0,
         exit: 162),
     SlideItemAnimationModel(
-        id: "slide_3-layer_1",
-        entryDuration: 800,
-        exitDuration: 500,
-        entry: 12,
-        exit: 169),
-    SlideItemAnimationModel(
         id: "slide_3-layer_2",
         entryDuration: 800,
         exitDuration: 500,
@@ -61,8 +55,7 @@ class _CarouselSlide3State extends State<CarouselSlide3>
     animation = Tween<double>(begin: 0, end: 200).animate(animationController)
       ..addListener(() {
         setState(() {
-          slideItems =
-              getSlideItemAnimationUpdate(animation.value, slideItems);
+          slideItems = getSlideItemAnimationUpdate(animation.value, slideItems);
         });
       });
     animationController.forward();
@@ -78,7 +71,7 @@ class _CarouselSlide3State extends State<CarouselSlide3>
           Positioned(
             left: 400,
             top: 117,
-            width: 420,
+            width: 650,
             height: 395,
             child: WidgetSlideUpDownFadeAnimation(
               duration: getSlideItemAnimationDuration("slide_3-bg", slideItems),
@@ -87,21 +80,6 @@ class _CarouselSlide3State extends State<CarouselSlide3>
               offset: slideItemOffset,
               child:
                   Image.asset("assets/images/slide_3-bg.jpg", fit: BoxFit.fill),
-            ),
-          ),
-          Positioned(
-            left: 260,
-            top: 95,
-            width: 801,
-            height: 429,
-            child: WidgetSlideUpDownFadeAnimation(
-              duration:
-                  getSlideItemAnimationDuration("slide_3-layer_1", slideItems),
-              direction: getSlideItemAnimationVisibility(
-                  "slide_3-layer_1", slideItems),
-              offset: slideItemOffset,
-              child: Image.asset("assets/images/slide_3-layer_1.png",
-                  fit: BoxFit.fill),
             ),
           ),
           Positioned(

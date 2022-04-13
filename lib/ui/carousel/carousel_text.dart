@@ -4,9 +4,8 @@ import 'package:flutter_website/components/components.dart';
 RichText slide1Text = RichText(
   text: const TextSpan(
     children: <TextSpan>[
-      TextSpan(text: 'Design', style: carouselBlueTextStyle),
-      TextSpan(text: ' beautiful ', style: carouselWhiteTextStyle),
-      TextSpan(text: 'apps', style: carouselBlueTextStyle)
+      TextSpan(text: 'Diseños', style: carouselBlueTextStyle),
+      TextSpan(text: ' atractivos', style: carouselWhiteTextStyle),
     ],
   ),
   textAlign: TextAlign.center,
@@ -15,8 +14,8 @@ RichText slide1Text = RichText(
 RichText slide2Text = RichText(
   text: const TextSpan(
     children: <TextSpan>[
-      TextSpan(text: 'Productively', style: carouselWhiteTextStyle),
-      TextSpan(text: ' build apps', style: carouselBlueTextStyle),
+      TextSpan(text: 'Excelente ', style: carouselWhiteTextStyle),
+      TextSpan(text: ' rendimiento', style: carouselBlueTextStyle),
     ],
   ),
   textAlign: TextAlign.center,
@@ -25,9 +24,8 @@ RichText slide2Text = RichText(
 RichText slide3Text = RichText(
   text: const TextSpan(
     children: <TextSpan>[
-      TextSpan(text: 'Create', style: carouselBlueTextStyle),
-      TextSpan(text: ' faster ', style: carouselWhiteTextStyle),
-      TextSpan(text: 'apps', style: carouselBlueTextStyle)
+      TextSpan(text: 'Rapido ', style: carouselBlueTextStyle),
+      TextSpan(text: ' desarollo', style: carouselWhiteTextStyle),
     ],
   ),
   textAlign: TextAlign.center,
@@ -36,9 +34,8 @@ RichText slide3Text = RichText(
 RichText slide4Text = RichText(
   text: const TextSpan(
     children: <TextSpan>[
-      TextSpan(text: 'Target', style: carouselBlueTextStyle),
-      TextSpan(text: ' mobile, web, & desktop ', style: carouselWhiteTextStyle),
-      TextSpan(text: 'apps', style: carouselBlueTextStyle)
+      TextSpan(text: 'Plataformas', style: carouselBlueTextStyle),
+      TextSpan(text: ' móvil, web & escritorio', style: carouselWhiteTextStyle),
     ],
     style: TextStyle(height: 1.1),
   ),

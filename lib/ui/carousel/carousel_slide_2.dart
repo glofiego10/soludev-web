@@ -33,12 +33,6 @@ class _CarouselSlide2State extends State<CarouselSlide2>
         entry: 13,
         exit: 172),
     SlideItemAnimationModel(
-        id: 'slide_2-layer_1',
-        entryDuration: 800,
-        exitDuration: 500,
-        entry: 17,
-        exit: 178),
-    SlideItemAnimationModel(
         id: 'slide_2-text',
         entryDuration: 800,
         exitDuration: 500,
@@ -61,8 +55,7 @@ class _CarouselSlide2State extends State<CarouselSlide2>
     animation = Tween<double>(begin: 0, end: 200).animate(animationController)
       ..addListener(() {
         setState(() {
-          slideItems =
-              getSlideItemAnimationUpdate(animation.value, slideItems);
+          slideItems = getSlideItemAnimationUpdate(animation.value, slideItems);
         });
       });
     animationController.forward();
@@ -87,23 +80,6 @@ class _CarouselSlide2State extends State<CarouselSlide2>
               offset: slideItemOffset,
               child: Image.asset(
                 'assets/images/slide_2-bg.jpg',
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          Positioned(
-            left: 157,
-            top: 138,
-            width: 714,
-            height: 298,
-            child: WidgetSlideUpDownFadeAnimation(
-              duration:
-                  getSlideItemAnimationDuration('slide_2-layer_1', slideItems),
-              direction: getSlideItemAnimationVisibility(
-                  'slide_2-layer_1', slideItems),
-              offset: slideItemOffset,
-              child: Image.asset(
-                'assets/images/slide_2-layer_1.png',
                 fit: BoxFit.fill,
               ),
             ),

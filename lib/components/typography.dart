@@ -28,7 +28,22 @@ const TextStyle carouselBlueTextStyle = TextStyle(
       Shadow(
         color: Color(0x40000000),
         offset: Offset(1, 1),
-        blurRadius: 2,
+        blurRadius: 1,
+      ),
+      Shadow(
+        color: Color(0x40000000),
+        offset: Offset(-1, -1),
+        blurRadius: 1,
+      ),
+      Shadow(
+        color: Color(0x40000000),
+        offset: Offset(-1, 1),
+        blurRadius: 1,
+      ),
+      Shadow(
+        color: Color(0x40000000),
+        offset: Offset(1, -1),
+        blurRadius: 1,
       )
     ]);
 
@@ -40,6 +55,21 @@ const TextStyle carouselWhiteTextStyle = TextStyle(
       Shadow(
         color: Color(0x40000000),
         offset: Offset(1, 1),
-        blurRadius: 2,
+        blurRadius: 3,
+      ),
+      Shadow(
+        color: Color(0x40000000),
+        offset: Offset(-1, -1),
+        blurRadius: 3,
+      ),
+      Shadow(
+        color: Color(0x40000000),
+        offset: Offset(-1, 1),
+        blurRadius: 3,
+      ),
+      Shadow(
+        color: Color(0x40000000),
+        offset: Offset(1, -1),
+        blurRadius: 3,
       )
     ]);
