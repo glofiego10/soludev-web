@@ -197,9 +197,6 @@ class MenuBar extends StatelessWidget {
                             borderRadius: BorderRadius.all(Radius.circular(0)));
                       },
                     ),
-                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                        const EdgeInsets.symmetric(
-                            vertical: 22, horizontal: 28)),
                     // Side adds pressed highlight outline.
                     side: MaterialStateProperty.resolveWith<BorderSide>(
                         (Set<MaterialState> states) {
@@ -256,18 +253,18 @@ class Features extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 32),
+                  padding: const EdgeInsets.only(bottom: 15),
                   child: buildMaterialIconCircle(
-                      "assets/images/icon_development.png", 68),
+                      "assets/images/icon_development.png", 250),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(bottom: 16),
-                  child: Text("Fast Development",
+                  child: Text("Desarrollo Ágil",
                       style: headlineSecondaryTextStyle,
                       textAlign: TextAlign.center),
                 ),
                 const Text(
-                    "Paint your app to life in milliseconds with Stateful Hot Reload. Use a rich set of fully-customizable widgets to build native interfaces in minutes.",
+                    "Garantizamos calidad, eficiencia,  experiencia satisfactoria por parte del cliente,  entrega de productos y servicios en intervalos cortos de tiempo y con rápida respuesta a los cambios a través del desarrollo mediante metodologías agiles.",
                     style: bodyTextStyle,
                     textAlign: TextAlign.center),
               ],
@@ -279,18 +276,18 @@ class Features extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 32),
+                  padding: const EdgeInsets.only(bottom: 15),
                   child:
-                      buildMaterialIconCircle("assets/images/icon_ui.png", 68),
+                      buildMaterialIconCircle("assets/images/icon_ui.png", 250),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(bottom: 16),
-                  child: Text("Expressive and Flexible UI",
+                  child: Text("Desarrollo Multiplataforma",
                       style: headlineSecondaryTextStyle,
                       textAlign: TextAlign.center),
                 ),
                 const Text(
-                    "Quickly ship features with a focus on native end-user experiences. Layered architecture allows for full customization, which results in incredibly fast rendering and expressive and flexible designs.",
+                    "Desarrollamos nuestras aplicaciones tanto de iOS como Android de forma nativa y como si fuera poco, agregamos  tanto aplicaciones de escritorio y desarrollo de sistemas Web , logrando de esta manera productos finales confiables y de alta performance en su funcionamiento.",
                     style: bodyTextStyle,
                     textAlign: TextAlign.center),
               ],
@@ -302,31 +299,23 @@ class Features extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 32),
+                  padding: const EdgeInsets.only(bottom: 15),
                   child: buildMaterialIconCircle(
-                      "assets/images/icon_performance.png", 68),
+                      "assets/images/icon_performance.png", 250),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(bottom: 16),
-                  child: Text("Native Performance",
+                  child: Text("Comunicación y Soporte",
                       style: headlineSecondaryTextStyle,
                       textAlign: TextAlign.center),
                 ),
                 RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                     style: bodyTextStyle,
                     children: [
-                      const TextSpan(
-                          text:
-                              "Flutter’s widgets incorporate all critical platform differences such as scrolling, navigation, icons and fonts, and your Flutter code is compiled to native ARM machine code using "),
                       TextSpan(
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              openUrl("https://dart.dev/platforms");
-                            },
-                          text: "Dart's native compilers",
-                          style: bodyLinkTextStyle),
-                      const TextSpan(text: "."),
+                          text:
+                              "Mantenemos una relación cercana con nuestros clientes durante el proceso de desarrollo, que continúa posterior a la implementación de la solución. Estamos a disposición del cliente para resolver cualquier falla o situación que se presente de forma inmediata."),
                     ],
                   ),
                   textAlign: TextAlign.center,
@@ -611,7 +600,6 @@ class SobreNosotros extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  opacity: 0.2,
                   image:
                       AssetImage('assets/images/soludev_logo_horizontal.png'))),
           constraints: const BoxConstraints(maxWidth: 800),

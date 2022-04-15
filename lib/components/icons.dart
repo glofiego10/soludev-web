@@ -15,8 +15,8 @@ Widget buildMaterialIconCircle(String imagePath, double size) {
       child: Image.asset(
         imagePath,
         fit: BoxFit.contain,
-        width: size * 0.5,
-        height: size * 0.5,
+        width: size * 0.7,
+        height: size * 0.7,
       ),
     ),
   );
