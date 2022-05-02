@@ -122,6 +122,28 @@ class MenuBar extends StatelessWidget {
                 },
                 child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Text("Cosmere",
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: navLinkColor,
+                            fontFamily: fontFamily))),
+              ),
+            ),
+          ),
+          ResponsiveVisibility(
+            visible: false,
+            visibleWhen: const [Condition.largerThan(name: MOBILE)],
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () {
+                  itemScrollController.scrollTo(
+                      index: 5,
+                      duration: const Duration(seconds: 2),
+                      curve: Curves.easeInOutCubic);
+                },
+                child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     child: Text("Sobre Nosotros",
                         style: TextStyle(
                             fontSize: 16,
@@ -159,14 +181,14 @@ class MenuBar extends StatelessWidget {
             ),
           ),
           ResponsiveVisibility(
-            visible: true,
-            //visibleWhen: const [Condition.largerThan(name: MOBILE)],
+            visible: false,
+            visibleWhen: const [Condition.largerThan(name: TABLET)],
             child: Padding(
               padding: const EdgeInsets.only(left: 8, right: 0),
               child: TextButton(
                 onPressed: () {
                   itemScrollController.scrollTo(
-                      index: 5,
+                      index: 6,
                       duration: const Duration(seconds: 2),
                       curve: Curves.easeInOutCubic);
                 },
@@ -574,6 +596,124 @@ class _DigitalMenuState extends State<DigitalMenu> {
                   return Container();
                 }
               },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Cosmere extends StatefulWidget {
+  const Cosmere({Key? key}) : super(key: key);
+
+  @override
+  _CosmereState createState() => _CosmereState();
+}
+
+class _CosmereState extends State<Cosmere> {
+  late VideoPlayerController videoController;
+  late Future<void> initializeVideoPlayerFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    videoController =
+        VideoPlayerController.asset("assets/videos/Video_Cosmere_web.mp4");
+    videoController.setVolume(0);
+    videoController.setLooping(true);
+    initializeVideoPlayerFuture = videoController.initialize().then((_) {
+      if (mounted) {
+        // Display the first frame of the video before playback.
+        setState(() {});
+        videoPlay();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    videoController.dispose();
+    super.dispose();
+  }
+
+  void videoPlay() {
+    videoController.play();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(4),
+          border: Border.all(color: border)),
+      margin: blockMargin,
+      padding: blockPadding(context),
+      child: ResponsiveRowColumn(
+        layout: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+            ? ResponsiveRowColumnType.COLUMN
+            : ResponsiveRowColumnType.ROW,
+        rowCrossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ResponsiveRowColumnItem(
+            rowFlex: 2,
+            child: FutureBuilder(
+              future: initializeVideoPlayerFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  // If the VideoPlayerController has finished initialization, use
+                  // the data it provides to limit the aspect ratio of the VideoPlayer.
+                  return AspectRatio(
+                    aspectRatio: videoController.value.aspectRatio,
+                    child: RepaintBoundary(child: VideoPlayer(videoController)),
+                  );
+                } else {
+                  // If the VideoPlayerController is still initializing, show a
+                  // loading spinner.
+                  return Container();
+                }
+              },
+            ),
+          ),
+          ResponsiveRowColumnItem(
+            rowFlex: 1,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(25, 32, 25, 0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  RichText(
+                    textAlign: TextAlign.justify,
+                    text: TextSpan(
+                      style: bodyTextStyle.copyWith(fontSize: 20),
+                      children: const [
+                        TextSpan(
+                            text:
+                                "Aplicación no oficial de Brandon Sanderson. Cosmere es la palabra que define el universo en el cual muchos de los libros de Brandon Sanderson tienen lugar. Es decir, a pesar de que las historias se desarrollan en diferentes mundos, cada uno de estos se encuentra en la misma galaxia, o cúmulo estelar. Con esta aplicación esperamos ayudarte a guiar tu lectura y guardar tu progreso."),
+                        TextSpan(text: "\n"),
+                        TextSpan(text: "\n"),
+                      ],
+                    ),
+                  ),
+                  MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: () {
+                        openUrl(
+                            "https://play.google.com/store/apps/details?id=com.soludev.cosmere");
+                      },
+                      child: const Image(
+                        image: const AssetImage(
+                            'assets/images/disponible-google-play.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -1076,7 +1216,7 @@ class Footer extends StatelessWidget {
                               openUrl(
                                   "https://play.google.com/store/apps/developer?id=SoluDev");
                             },
-                          text: "google play"),
+                          text: "Google Play"),
                       const TextSpan(text: "  •  "),
                       TextSpan(
                           recognizer: TapGestureRecognizer()
@@ -1084,7 +1224,7 @@ class Footer extends StatelessWidget {
                               openUrl(
                                   "https://www.youtube.com/channel/UCeldMeYBi5ebvTmB7t_3XLA");
                             },
-                          text: "youtube"),
+                          text: "YouTube"),
                       const TextSpan(text: "  •  "),
                       TextSpan(
                           recognizer: TapGestureRecognizer()
@@ -1092,21 +1232,21 @@ class Footer extends StatelessWidget {
                               openUrl(
                                   "https://drive.google.com/file/d/1v2KTZfr2AgrAz4Z10nyYa5Hsyei7EriI/view?usp=sharing");
                             },
-                          text: "políticas de privacidad"),
+                          text: "Políticas de privacidad"),
                       const TextSpan(text: "  •  "),
                       TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               openUrl("https://soludevs.web.app/");
                             },
-                          text: "español"),
+                          text: "Español"),
                       const TextSpan(text: "  •  "),
                       TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               openUrl("https://soludevs.web.app/");
                             },
-                          text: "english"),
+                          text: "English"),
                     ],
                   ),
                 ),
